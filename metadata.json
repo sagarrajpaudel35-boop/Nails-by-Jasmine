@@ -1,0 +1,6 @@
+{
+  "name": "Nails by Jasmine",
+  "description": "Boutique private nail studio in Prithivi Chowk, Pokhara, Nepal. Handcrafted gel nails, acrylics, nail art, and custom sets with a soft luxury aesthetic.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
