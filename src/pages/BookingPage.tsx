@@ -13,9 +13,11 @@ import {
   Info,
   ShieldCheck,
   ArrowRight,
+  MessageCircle,
 } from 'lucide-react';
 import { NailCurveAccent } from '../components/DecorativeAccents';
 import { ScrollReveal, MotionButton, StaggerContainer, StaggerItem } from '../components/AnimatedUi';
+import { CONTACT_INFO } from '../data/contactInfo';
 
 interface BookingPageProps {
   onNavigate: (page: PageId) => void;
@@ -53,6 +55,8 @@ export const BookingPage: React.FC<BookingPageProps> = ({
     if (!formData.name.trim() || !formData.phone.trim()) {
       return;
     }
+    const whatsappUrl = `https://wa.me/9779704533086?text=${encodeURIComponent(inquirySummaryText)}`;
+    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
     setSubmitted(true);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -61,6 +65,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({
 
   const inquirySummaryText = `Hi Jasmine! I'd like to book an appointment with Nails by Jasmine.
 Name: ${formData.name || '[Your Name]'}
+Phone: ${formData.phone || '[Your Phone]'}
 Service: ${selectedService?.name || 'Nail Service'}
 Preferred Date: ${formData.date || '[Preferred Date]'}
 Preferred Time: ${formData.timeSlot}
@@ -70,7 +75,7 @@ Note: ${formData.message || 'Looking forward to my appointment!'}`;
   const copyInquiryText = () => {
     navigator.clipboard.writeText(inquirySummaryText);
     setCopiedNotice(true);
-    setTimeout(() => setCopiedNotice(false), 3000);
+    setTimeout(() => setCopiedNotice(false), 4000);
   };
 
   return (
@@ -95,16 +100,75 @@ Note: ${formData.message || 'Looking forward to my appointment!'}`;
         </ScrollReveal>
         <ScrollReveal variant="fade-up" delay={0.3}>
           <p className="text-base sm:text-lg text-[#615248] leading-relaxed text-balance">
-            To book an appointment, send us a DM on Instagram or contact us by phone. You can also send a request through the form below to check availability.
+            Appointments and inquiries are handled directly through WhatsApp. Fill out your details below to send an instant request, or message Jasmine directly.
           </p>
         </ScrollReveal>
       </section>
 
-      {/* Two Large Direct CTA Cards with Stagger Reveal */}
+      {/* Two Direct Action Cards */}
       <section>
         <StaggerContainer staggerChildren={0.15} className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
           
-          {/* Instagram Card */}
+          {/* WhatsApp Primary Card */}
+          <StaggerItem>
+            <motion.div
+              whileHover={{ y: -6, boxShadow: '0 12px 32px rgba(70,55,44,0.08)' }}
+              transition={{ duration: 0.3 }}
+              className="h-full bg-[#FFFDFB] rounded-[2rem] border border-[#D5E6D8] p-8 sm:p-10 flex flex-col justify-between shadow-[0_4px_20px_rgba(70,55,44,0.03)] hover:border-[#B7D8BD] transition-colors group"
+            >
+              <div className="space-y-4">
+                <div className="w-12 h-12 rounded-2xl bg-[#EBF7EE] flex items-center justify-center text-[#25D366] border border-[#CCE0C4]">
+                  <MessageCircle className="w-6 h-6" />
+                </div>
+                <div>
+                  <p className="text-xs uppercase tracking-widest text-[#1E8A42] font-semibold mb-1">
+                    Instant Booking & Inquiries
+                  </p>
+                  <h2 className="font-serif text-2xl sm:text-3xl text-[#2C2420] font-medium">
+                    WhatsApp Booking
+                  </h2>
+                </div>
+                <p className="text-sm text-[#68574E] leading-relaxed">
+                  Send reference photos, ask questions about nail lengths, and get instant booking confirmation directly on WhatsApp.
+                </p>
+                <div className="p-3 bg-[#FAF7F2] rounded-xl border border-[#EBE1D3] text-xs text-[#806E64] space-y-1">
+                  <div>
+                    <span className="font-semibold text-[#2C2420]">Phone / WhatsApp:</span>{' '}
+                    <a
+                      href={CONTACT_INFO.telUrl}
+                      className="font-mono text-[#2C2420] hover:text-[#1E8A42] font-semibold"
+                    >
+                      {CONTACT_INFO.phoneDisplay}
+                    </a>
+                  </div>
+                  <div className="text-[11px] text-[#7A6B62]">
+                    Mon – Sat: 10:00 AM – 6:30 PM
+                  </div>
+                </div>
+              </div>
+
+              <div className="pt-6 mt-6 border-t border-[#F2E8DC] flex flex-col sm:flex-row gap-3">
+                <a
+                  href={CONTACT_INFO.whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 text-xs uppercase tracking-wider font-semibold text-white bg-[#25D366] hover:bg-[#1EBE5D] rounded-full transition-all shadow-xs cursor-pointer active:scale-98"
+                >
+                  <MessageCircle className="w-4 h-4" />
+                  <span>Chat on WhatsApp</span>
+                </a>
+                <a
+                  href={CONTACT_INFO.telUrl}
+                  className="inline-flex items-center justify-center gap-1.5 px-5 py-3.5 text-xs uppercase tracking-wider font-semibold text-[#2C2420] bg-[#FAF7F2] hover:bg-white border border-[#D9CDBC] rounded-full transition-all shadow-xs cursor-pointer active:scale-98"
+                >
+                  <Phone className="w-3.5 h-3.5 text-[#4B7351]" />
+                  <span>Call</span>
+                </a>
+              </div>
+            </motion.div>
+          </StaggerItem>
+
+          {/* Instagram Portfolio Card */}
           <StaggerItem>
             <motion.div
               whileHover={{ y: -6, boxShadow: '0 12px 32px rgba(70,55,44,0.08)' }}
@@ -117,68 +181,37 @@ Note: ${formData.message || 'Looking forward to my appointment!'}`;
                 </div>
                 <div>
                   <p className="text-xs uppercase tracking-widest text-[#B6566E] font-semibold mb-1">
-                    Fastest Response
+                    Design Portfolio
                   </p>
                   <h2 className="font-serif text-2xl sm:text-3xl text-[#2C2420] font-medium">
-                    Instagram DM
+                    Instagram
                   </h2>
                 </div>
                 <p className="text-sm text-[#68574E] leading-relaxed">
-                  Send reference photos, ask questions about nail lengths, and get instant booking confirmation directly in our direct messages.
+                  Browse Jasmine's latest handcrafted sets, fresh designs, and stories for style inspiration before your visit.
                 </p>
                 <div className="p-3 bg-[#FAF7F2] rounded-xl border border-[#EBE1D3] text-xs text-[#806E64]">
                   <span className="font-semibold text-[#2C2420]">Handle:</span>{' '}
-                  <span className="italic font-mono text-[#8C7A70]">[Instagram Handle Placeholder]</span>
+                  <a
+                    href={CONTACT_INFO.instagramUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-mono text-[#B6566E] hover:underline font-semibold"
+                  >
+                    {CONTACT_INFO.instagramDisplay}
+                  </a>
                 </div>
               </div>
 
               <div className="pt-6 mt-6 border-t border-[#F2E8DC]">
                 <a
-                  href="#booking-inquiry"
-                  className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 text-xs uppercase tracking-wider font-semibold text-[#2C2420] bg-[#F8EABA] hover:bg-[#F2DF9E] border border-[#DEC37C]/70 rounded-full transition-all shadow-xs cursor-pointer active:scale-98"
-                >
-                  <Instagram className="w-4 h-4 text-[#B6566E]" />
-                  <span>Send a DM</span>
-                </a>
-              </div>
-            </motion.div>
-          </StaggerItem>
-
-          {/* Phone Card */}
-          <StaggerItem>
-            <motion.div
-              whileHover={{ y: -6, boxShadow: '0 12px 32px rgba(70,55,44,0.08)' }}
-              transition={{ duration: 0.3 }}
-              className="h-full bg-[#FFFDFB] rounded-[2rem] border border-[#E9DFD2] p-8 sm:p-10 flex flex-col justify-between shadow-[0_4px_20px_rgba(70,55,44,0.03)] hover:border-[#DBC8B2] transition-colors group"
-            >
-              <div className="space-y-4">
-                <div className="w-12 h-12 rounded-2xl bg-[#F0F5F1] flex items-center justify-center text-[#4B7351] border border-[#D5E3D8]">
-                  <Phone className="w-6 h-6" />
-                </div>
-                <div>
-                  <p className="text-xs uppercase tracking-widest text-[#4B7351] font-semibold mb-1">
-                    Direct Call
-                  </p>
-                  <h2 className="font-serif text-2xl sm:text-3xl text-[#2C2420] font-medium">
-                    Phone Contact
-                  </h2>
-                </div>
-                <p className="text-sm text-[#68574E] leading-relaxed">
-                  Prefer to call or send a text? Contact Jasmine directly to discuss same-week openings and wedding or event bookings.
-                </p>
-                <div className="p-3 bg-[#FAF7F2] rounded-xl border border-[#EBE1D3] text-xs text-[#806E64]">
-                  <span className="font-semibold text-[#2C2420]">Phone:</span>{' '}
-                  <span className="italic font-mono text-[#8C7A70]">[Phone Number Placeholder]</span>
-                </div>
-              </div>
-
-              <div className="pt-6 mt-6 border-t border-[#F2E8DC]">
-                <a
-                  href="#booking-inquiry"
+                  href={CONTACT_INFO.instagramUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 text-xs uppercase tracking-wider font-semibold text-[#2C2420] bg-[#FAF7F2] hover:bg-white border border-[#D9CDBC] rounded-full transition-all shadow-xs cursor-pointer active:scale-98"
                 >
-                  <Phone className="w-4 h-4 text-[#4B7351]" />
-                  <span>Call Us</span>
+                  <Instagram className="w-4 h-4 text-[#B6566E]" />
+                  <span>View Profile ({CONTACT_INFO.instagramDisplay})</span>
                 </a>
               </div>
             </motion.div>
@@ -192,26 +225,26 @@ Note: ${formData.message || 'Looking forward to my appointment!'}`;
         <section id="booking-inquiry" className="scroll-mt-24">
           {submitted ? (
             <div className="bg-[#FFFDFB] rounded-[2.5rem] border border-[#DFCDB7] p-8 sm:p-12 text-center space-y-6 shadow-sm">
-              <div className="w-16 h-16 rounded-full bg-[#F3F7EE] text-[#4E7D48] flex items-center justify-center mx-auto border border-[#CCE0C4]">
-                <CheckCircle className="w-8 h-8" />
+              <div className="w-16 h-16 rounded-full bg-[#EBF7EE] text-[#25D366] flex items-center justify-center mx-auto border border-[#CCE0C4]">
+                <MessageCircle className="w-8 h-8" />
               </div>
 
               <div className="space-y-2">
-                <p className="text-xs uppercase tracking-widest text-[#9A8150] font-semibold">
-                  Request Received
+                <p className="text-xs uppercase tracking-widest text-[#1E8A42] font-semibold">
+                  Inquiry Prepared for WhatsApp
                 </p>
                 <h2 className="font-serif text-3xl sm:text-4xl text-[#2C2420] font-medium">
                   Thank You, {formData.name}!
                 </h2>
                 <p className="text-sm text-[#6B5A51] max-w-lg mx-auto leading-relaxed">
-                  Jasmine will review the schedule for <strong>{formData.date || 'your chosen date'}</strong> at <strong>{formData.timeSlot}</strong> for <strong>{selectedService?.name}</strong> and contact you to confirm.
+                  Your appointment request has been prepared for WhatsApp with Jasmine at <strong>{CONTACT_INFO.phoneDisplay}</strong>. Tap below if WhatsApp didn't open automatically.
                 </p>
               </div>
 
-              {/* Formatted DM text block for easy copy */}
+              {/* Formatted WhatsApp message block */}
               <div className="max-w-md mx-auto text-left bg-[#FAF7F2] p-5 rounded-2xl border border-[#E8DEC7] space-y-3">
                 <div className="flex items-center justify-between text-xs text-[#7A6B62]">
-                  <span className="font-medium text-[#2C2420]">Copy Request for Instagram DM:</span>
+                  <span className="font-medium text-[#2C2420]">Your WhatsApp Message:</span>
                   <button
                     onClick={copyInquiryText}
                     className="flex items-center gap-1 text-xs text-[#9E7D2D] hover:underline font-semibold cursor-pointer"
@@ -223,6 +256,31 @@ Note: ${formData.message || 'Looking forward to my appointment!'}`;
                 <pre className="text-xs font-sans text-[#52443C] whitespace-pre-wrap bg-white p-3 rounded-lg border border-[#EDE2D4]">
                   {inquirySummaryText}
                 </pre>
+              </div>
+
+              {/* Direct WhatsApp Action Button */}
+              <div className="max-w-lg mx-auto space-y-3 pt-2">
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+                  <a
+                    href={`https://wa.me/9779704533086?text=${encodeURIComponent(inquirySummaryText)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-[#25D366] hover:bg-[#1EBE5D] text-white text-xs font-semibold uppercase tracking-wider transition-all shadow-xs cursor-pointer active:scale-98"
+                  >
+                    <MessageCircle className="w-4 h-4" />
+                    <span>Open in WhatsApp</span>
+                  </a>
+
+                  <a
+                    href={CONTACT_INFO.instagramUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-[#FAF7F2] hover:bg-white text-[#2C2420] border border-[#D9CDBC] text-xs font-semibold uppercase tracking-wider transition-all shadow-xs"
+                  >
+                    <Instagram className="w-4 h-4 text-[#B6566E]" />
+                    <span>Instagram: {CONTACT_INFO.instagramDisplay}</span>
+                  </a>
+                </div>
               </div>
 
               <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -247,14 +305,14 @@ Note: ${formData.message || 'Looking forward to my appointment!'}`;
             <div className="bg-[#FFFDFB] rounded-[2.5rem] border border-[#E9DFD2] p-8 sm:p-12 lg:p-14 shadow-[0_4px_24px_rgba(70,55,44,0.03)] space-y-8">
               <div className="border-b border-[#F0E6D8] pb-6 space-y-2">
                 <div className="inline-flex items-center gap-1.5 text-xs uppercase tracking-wider text-[#9A8150] font-medium">
-                  <Sparkles className="w-3.5 h-3.5" />
-                  <span>Online Appointment Inquiry</span>
+                  <MessageCircle className="w-3.5 h-3.5 text-[#25D366]" />
+                  <span>Direct WhatsApp Inquiry</span>
                 </div>
                 <h2 className="font-serif text-3xl sm:text-4xl text-[#2C2420] font-normal">
                   Check Studio Availability
                 </h2>
                 <p className="text-xs sm:text-sm text-[#6C5B51]">
-                  Fill out this quick form and Jasmine will get back to you promptly to finalize your booking time.
+                  Fill out your appointment details below. Clicking send will open WhatsApp with your message pre-filled to Jasmine.
                 </p>
               </div>
 
@@ -384,10 +442,10 @@ Note: ${formData.message || 'Looking forward to my appointment!'}`;
                   <MotionButton
                     type="submit"
                     variant="primary"
-                    icon={<Sparkles className="w-3.5 h-3.5 text-[#9E7D2D]" />}
+                    icon={<MessageCircle className="w-4 h-4 text-[#25D366]" />}
                     className="w-full sm:w-auto px-8 py-4 text-xs uppercase tracking-wider font-semibold"
                   >
-                    Send Booking Request
+                    Send Inquiry via WhatsApp
                   </MotionButton>
                 </div>
 

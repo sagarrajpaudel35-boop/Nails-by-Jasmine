@@ -16,9 +16,9 @@ async function startServer() {
 
   // Check portrait status
   app.get('/api/portrait-status', (_req, res) => {
-    const publicPhoto = path.join(__dirname, 'public', 'jasmine_portrait.jpg');
-    const exists = fs.existsSync(publicPhoto);
-    res.json({ exists, url: exists ? '/jasmine_portrait.jpg' : null });
+    const customPhoto = path.join(__dirname, 'public', 'jasmine_portrait.jpg');
+    const exists = fs.existsSync(customPhoto);
+    res.json({ exists, url: exists ? '/jasmine_portrait.jpg' : '/jasmine_photo.jpg' });
   });
 
   // Permanently save Jasmine original portrait to server public directory
@@ -37,16 +37,17 @@ async function startServer() {
         fs.mkdirSync(publicDir, { recursive: true });
       }
 
-      const publicFilePath = path.join(publicDir, 'jasmine_portrait.jpg');
-      fs.writeFileSync(publicFilePath, buffer);
+      fs.writeFileSync(path.join(publicDir, 'jasmine_portrait.jpg'), buffer);
+      fs.writeFileSync(path.join(publicDir, 'jasmine_photo.jpg'), buffer);
 
       // Also sync to dist if already built
       const distDir = path.join(__dirname, 'dist');
       if (fs.existsSync(distDir)) {
         fs.writeFileSync(path.join(distDir, 'jasmine_portrait.jpg'), buffer);
+        fs.writeFileSync(path.join(distDir, 'jasmine_photo.jpg'), buffer);
       }
 
-      console.log('Successfully saved Jasmine original photo to:', publicFilePath);
+      console.log('Successfully saved Jasmine original photo to public/jasmine_portrait.jpg and public/jasmine_photo.jpg');
       return res.json({ success: true, url: '/jasmine_portrait.jpg' });
     } catch (err) {
       console.error('Failed to save portrait:', err);

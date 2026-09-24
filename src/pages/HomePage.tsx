@@ -12,10 +12,12 @@ import {
   CheckCircle2,
   Instagram,
   Eye,
+  MessageCircle,
 } from 'lucide-react';
 import { TinyStar, MicroFlower, NailCurveAccent, SoftOrganicBlob } from '../components/DecorativeAccents';
 import { ScrollReveal, StaggerContainer, StaggerItem, MotionButton, FloatAccent } from '../components/AnimatedUi';
 import { handleImageError } from '../utils/imageUtils';
+import { CONTACT_INFO } from '../data/contactInfo';
 
 interface HomePageProps {
   onNavigate: (page: PageId) => void;
@@ -514,26 +516,26 @@ export const HomePage: React.FC<HomePageProps> = ({
             </h2>
 
             <p className="text-base sm:text-lg text-[#66554B] max-w-xl mx-auto font-normal text-balance">
-              Let's create something beautiful for your nails. Appointments can currently be arranged directly through Instagram DM or phone call.
+              Let's create something beautiful for your nails. Send your appointment inquiry directly via WhatsApp or browse our gallery for inspiration.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
               <MotionButton
                 variant="primary"
                 onClick={() => onNavigate('booking')}
-                icon={<Sparkles className="w-3.5 h-3.5 text-[#9E7D2D]" />}
+                icon={<MessageCircle className="w-3.5 h-3.5 text-[#25D366]" />}
                 className="w-full sm:w-auto px-8 py-3.5 text-xs uppercase tracking-wider font-semibold"
               >
-                Book Your Appointment
+                Book via WhatsApp
               </MotionButton>
 
               <MotionButton
                 variant="secondary"
-                onClick={() => onNavigate('booking')}
+                onClick={() => window.open(CONTACT_INFO.instagramUrl, '_blank', 'noopener,noreferrer')}
                 icon={<Instagram className="w-3.5 h-3.5 text-[#B6566E]" />}
                 className="w-full sm:w-auto px-7 py-3.5 text-xs uppercase tracking-wider font-semibold"
               >
-                Message on Instagram
+                Instagram: {CONTACT_INFO.instagramDisplay}
               </MotionButton>
             </div>
 

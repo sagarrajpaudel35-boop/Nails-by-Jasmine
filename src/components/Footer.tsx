@@ -1,9 +1,10 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { PageId } from '../types';
-import { MapPin, Instagram, Phone, Clock, Heart, ArrowRight } from 'lucide-react';
+import { MapPin, Instagram, Phone, Clock, Heart, ArrowRight, MessageCircle } from 'lucide-react';
 import { TinyStar } from './DecorativeAccents';
 import { ScrollReveal, MotionButton } from './AnimatedUi';
+import { CONTACT_INFO } from '../data/contactInfo';
 
 interface FooterProps {
   onNavigate: (page: PageId) => void;
@@ -70,18 +71,38 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   <Clock className="w-4 h-4 text-[#C49B37] shrink-0 mt-0.5" />
                   <div>
                     <p className="font-medium text-[#2C2420]">By Appointment Only</p>
-                    <p className="text-xs text-[#7A6B62]">Mon – Sat: 10:00 AM – 6:30 PM</p>
-                    <p className="text-xs text-[#7A6B62]">Sunday: Closed / Special Booking</p>
+                    <p className="text-xs text-[#7A6B62]">{CONTACT_INFO.hours}</p>
+                    <p className="text-xs text-[#7A6B62]">{CONTACT_INFO.sunday}</p>
                   </div>
                 </div>
-                <div className="pt-2 border-t border-[#E7DCCE] space-y-1.5 text-xs text-[#7A6B62]">
-                  <p>Appointments arranged through:</p>
-                  <div className="flex items-center gap-2 text-[#3D332A] font-medium">
-                    <Instagram className="w-3.5 h-3.5 text-[#B6566E]" />
-                    <span>Instagram DM</span>
-                    <span>·</span>
-                    <Phone className="w-3.5 h-3.5 text-[#5C8561]" />
-                    <span>Phone Call</span>
+                <div className="pt-2.5 border-t border-[#E7DCCE] space-y-2 text-xs text-[#7A6B62]">
+                  <p className="font-medium text-[#4D3F37]">Direct Contact Channels:</p>
+                  <div className="flex flex-col gap-1.5">
+                    <a
+                      href={CONTACT_INFO.instagramUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-[#3D332A] hover:text-[#B6566E] transition-colors group"
+                    >
+                      <Instagram className="w-3.5 h-3.5 text-[#B6566E] group-hover:scale-110 transition-transform" />
+                      <span className="font-medium">{CONTACT_INFO.instagramDisplay}</span>
+                    </a>
+                    <a
+                      href={CONTACT_INFO.telUrl}
+                      className="inline-flex items-center gap-2 text-[#3D332A] hover:text-[#3B6E45] transition-colors group"
+                    >
+                      <Phone className="w-3.5 h-3.5 text-[#4B7351] group-hover:scale-110 transition-transform" />
+                      <span className="font-medium">{CONTACT_INFO.phoneDisplay}</span>
+                    </a>
+                    <a
+                      href={CONTACT_INFO.whatsappUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-[#3D332A] hover:text-[#25D366] transition-colors group"
+                    >
+                      <MessageCircle className="w-3.5 h-3.5 text-[#25D366] group-hover:scale-110 transition-transform" />
+                      <span>WhatsApp Jasmine</span>
+                    </a>
                   </div>
                 </div>
               </div>

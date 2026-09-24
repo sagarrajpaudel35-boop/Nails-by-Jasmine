@@ -1,0 +1,16 @@
+export const CONTACT_INFO = {
+  phone: '+977 9704533086',
+  phoneRaw: '+9779704533086',
+  phoneDisplay: '+977 9704533086',
+  telUrl: 'tel:+9779704533086',
+  whatsappUrl: 'https://wa.me/9779704533086?text=Hi%20Jasmine!%20I%20would%20like%20to%20book%20a%20nail%20session%20at%20Nails%20by%20Jasmine.',
+  instagramHandle: 'nailsbyjasmine266',
+  instagramDisplay: '@nailsbyjasmine266',
+  instagramUrl: 'https://www.instagram.com/nailsbyjasmine266/',
+  instagramDmUrl: 'https://ig.me/m/nailsbyjasmine266',
+  instagramDirectWebUrl: 'https://www.instagram.com/direct/t/nailsbyjasmine266/',
+  location: 'Prithivi Chowk, Pokhara, Nepal',
+  googleMapsQueryUrl: 'https://maps.google.com/?q=Prithivi+Chowk,+Pokhara,+Nepal',
+  hours: 'Mon – Sat: 10:00 AM – 6:30 PM',
+  sunday: 'Closed / Special Appointment Only',
+} as const;

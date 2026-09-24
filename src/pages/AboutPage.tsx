@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React from 'react';
 import { motion } from 'motion/react';
 import { PageId } from '../types';
 import {
@@ -9,7 +9,6 @@ import {
   ShieldCheck,
   Smile,
   ArrowRight,
-  Camera,
 } from 'lucide-react';
 import { TinyStar, MicroFlower, NailCurveAccent, SoftOrganicBlob } from '../components/DecorativeAccents';
 import { ScrollReveal, MotionButton, FloatAccent, StaggerContainer, StaggerItem } from '../components/AnimatedUi';
@@ -20,79 +19,6 @@ interface AboutPageProps {
 }
 
 export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
-  const [customPhoto, setCustomPhoto] = useState<string | null>(() => {
-    try {
-      return localStorage.getItem('jasmine_custom_portrait') || null;
-    } catch {
-      return null;
-    }
-  });
-  const fileInputRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    // Check if Jasmine original photo is saved on the server for all visitors
-    fetch('/api/portrait-status')
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.exists && data.url) {
-          setCustomPhoto((prev) => prev || `${data.url}?v=${Date.now()}`);
-        }
-      })
-      .catch(() => {});
-  }, []);
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file && file.type.startsWith('image/')) {
-      const reader = new FileReader();
-      reader.onload = async (event) => {
-        const dataUrl = event.target?.result as string;
-        if (dataUrl) {
-          setCustomPhoto(dataUrl);
-          try {
-            localStorage.setItem('jasmine_custom_portrait', dataUrl);
-          } catch {}
-
-          fetch('/api/upload-portrait', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ imageBase64: dataUrl }),
-          }).catch(() => {});
-        }
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const handleDrop = (e: React.DragEvent) => {
-    e.preventDefault();
-    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      const file = e.dataTransfer.files[0];
-      if (file.type.startsWith('image/')) {
-        const reader = new FileReader();
-        reader.onload = async (event) => {
-          const dataUrl = event.target?.result as string;
-          if (dataUrl) {
-            setCustomPhoto(dataUrl);
-            try {
-              localStorage.setItem('jasmine_custom_portrait', dataUrl);
-            } catch {}
-            fetch('/api/upload-portrait', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ imageBase64: dataUrl }),
-            }).catch(() => {});
-          }
-        };
-        reader.readAsDataURL(file);
-      }
-    }
-  };
-
-  const activePhotoSrc =
-    customPhoto ||
-    '/jasmine_photo.jpg';
-
   return (
     <div className="space-y-20 sm:space-y-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
       
@@ -111,57 +37,39 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
                 <div className="absolute inset-0 rounded-[2.8rem] border border-[#DECDBB] translate-x-3 translate-y-3 -z-10" />
 
                 {/* Main Portrait Box */}
-                <div
-                  className="relative rounded-[2.5rem] overflow-hidden bg-[#FAF7F2] shadow-[0_12px_36px_rgba(74,59,48,0.08)] border border-[#E5DACD] group"
-                  onDragOver={(e) => e.preventDefault()}
-                  onDrop={handleDrop}
-                >
+                <div className="relative rounded-[2.5rem] overflow-hidden bg-[#FAF7F2] shadow-[0_12px_36px_rgba(74,59,48,0.08)] border border-[#E5DACD] group">
                   <motion.img
-                    whileHover={{ scale: 1.03 }}
+                    whileHover={{ scale: 1.02 }}
                     transition={{ duration: 0.6 }}
-                    src={activePhotoSrc}
+                    src="/jasmine_photo.jpg"
                     alt="Jasmine, founder and nail artist at Nails by Jasmine in Pokhara"
                     onError={(e) => {
                       const img = e.currentTarget;
                       if (!img.dataset.retried) {
                         img.dataset.retried = '1';
-                        img.src = '/images/jasmine_birthday_photo_1790226189599.jpg';
+                        img.src = '/images/jasmine_photo.jpg';
                       }
                     }}
-                    className="w-full aspect-[3/4] object-cover transition-transform"
+                    className="w-full aspect-[3/4] object-cover object-top transition-transform"
                     referrerPolicy="no-referrer"
                   />
 
-                  {/* Subtle photo swap trigger on hover */}
-                  <motion.button
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                    type="button"
-                    onClick={() => fileInputRef.current?.click()}
-                    className="absolute top-4 right-4 p-2 rounded-full bg-[#FAF7F2]/80 hover:bg-white text-[#7A6B62] hover:text-[#2C2420] shadow-sm border border-[#E0D3C2]/80 transition-all opacity-0 group-hover:opacity-100 cursor-pointer z-10"
-                    title="Update photo"
-                  >
-                    <Camera className="w-3.5 h-3.5" />
-                  </motion.button>
-
                   <div className="absolute bottom-4 left-4 right-4 bg-[#FAF7F2]/95 backdrop-blur-md rounded-2xl p-4 border border-[#E0D3C2] z-10 shadow-xs">
-                    <p className="font-serif text-lg font-medium text-[#2C2420]">
-                      Jasmine
-                    </p>
-                    <p className="text-xs text-[#7A6B62]">
-                      Studio Founder & Nail Artist · Pokhara
-                    </p>
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="font-serif text-lg font-medium text-[#2C2420]">
+                          Jasmine
+                        </p>
+                        <p className="text-xs text-[#7A6B62]">
+                          Studio Founder & Nail Artist · Pokhara
+                        </p>
+                      </div>
+                      <span className="text-[11px] px-2.5 py-1 rounded-full bg-[#EFE8DD] text-[#7A6B62] font-medium border border-[#DECDBB]">
+                        Artist
+                      </span>
+                    </div>
                   </div>
                 </div>
-
-                {/* Hidden file input for seamless updates */}
-                <input
-                  ref={fileInputRef}
-                  type="file"
-                  accept="image/*"
-                  onChange={handleFileChange}
-                  className="hidden"
-                />
 
                 {/* Subtle floating decorative accents */}
                 <FloatAccent duration={4.2} yOffset={6} className="absolute -bottom-3 -right-3 p-2.5 bg-[#FAF7F2] rounded-full border border-[#DECDBB] shadow-sm">
