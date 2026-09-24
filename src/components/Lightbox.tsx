@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { GalleryItem } from '../types';
 import { X, ChevronLeft, ChevronRight, Sparkles } from 'lucide-react';
+import { handleImageError } from '../utils/imageUtils';
 
 interface LightboxProps {
   item: GalleryItem | null;
@@ -82,6 +83,7 @@ export const Lightbox: React.FC<LightboxProps> = ({
           <img
             src={item.image}
             alt={item.title}
+            onError={(e) => handleImageError(e, 'art')}
             className="w-full h-full object-cover max-h-[70vh] transition-all"
             referrerPolicy="no-referrer"
           />

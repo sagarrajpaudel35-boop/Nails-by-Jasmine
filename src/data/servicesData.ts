@@ -9,7 +9,7 @@ export const SERVICES_DATA: ServiceItem[] = [
     category: 'Enhancements',
     duration: '75–90 mins',
     priceNote: 'Price available on request',
-    image: '/src/assets/images/gel_polish_glossy_1790223389516.jpg',
+    image: '/images/gel_polish_glossy.jpg',
     highlights: ['Chip-resistant high gloss', 'Reinforced natural nail plate', 'Minimalist everyday elegance']
   },
   {
@@ -20,7 +20,7 @@ export const SERVICES_DATA: ServiceItem[] = [
     category: 'Full Sets',
     duration: '90–120 mins',
     priceNote: 'Price available on request',
-    image: '/src/assets/images/acrylic_extensions_1790223323470.jpg',
+    image: '/images/acrylic_extensions.jpg',
     highlights: ['Custom hand-sculpted shape', 'Long-lasting structural retention', 'Choice of almond, square or coffin']
   },
   {
@@ -31,7 +31,7 @@ export const SERVICES_DATA: ServiceItem[] = [
     category: 'Full Sets',
     duration: '90–105 mins',
     priceNote: 'Price available on request',
-    image: '/src/assets/images/hero_nail_studio_1790223292300.jpg',
+    image: '/images/hero_nail_studio.jpg',
     highlights: ['Balanced apex and smooth c-curve', 'Lightweight comfortable wear', 'Natural cuticle contouring']
   },
   {
@@ -42,7 +42,7 @@ export const SERVICES_DATA: ServiceItem[] = [
     category: 'Artistry',
     duration: '30–60 mins',
     priceNote: 'Price available on request',
-    image: '/src/assets/images/minimal_nail_art_1790223307802.jpg',
+    image: '/images/minimal_nail_art.jpg',
     highlights: ['Micro florals & French accents', 'Chrome & glazed donut finishes', 'Custom reference recreation']
   },
   {
@@ -53,7 +53,7 @@ export const SERVICES_DATA: ServiceItem[] = [
     category: 'Care & Prep',
     duration: '45–60 mins',
     priceNote: 'Price available on request',
-    image: '/src/assets/images/delicate_manicure_1790223401578.jpg',
+    image: '/images/delicate_manicure.jpg',
     highlights: ['Gentle dry Russian-style cuticle care', 'Precision nail shaping & buffing', 'Nourishing botanical oil treatment']
   },
   {
@@ -64,7 +64,7 @@ export const SERVICES_DATA: ServiceItem[] = [
     category: 'Color Application',
     duration: '45–60 mins',
     priceNote: 'Price available on request',
-    image: '/src/assets/images/gel_polish_glossy_1790223389516.jpg',
+    image: '/images/gel_polish_glossy.jpg',
     highlights: ['UV LED rapid cure formula', 'High pigment opacity & depth', 'Gentle soak-off friendly']
   },
   {
@@ -75,7 +75,7 @@ export const SERVICES_DATA: ServiceItem[] = [
     category: 'Bespoke Collections',
     duration: '105–135 mins',
     priceNote: 'Price available on request',
-    image: '/src/assets/images/custom_nail_set_1790223353010.jpg',
+    image: '/images/custom_nail_set.jpg',
     highlights: ['Pre-appointment style moodboard', 'Bridal & festival occasion styling', 'Hand-placed charms or pearl accents']
   }
 ];

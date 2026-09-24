@@ -5,6 +5,7 @@ import { GALLERY_DATA } from '../data/galleryData';
 import { Eye, Sparkles, Filter, ArrowRight } from 'lucide-react';
 import { NailCurveAccent } from '../components/DecorativeAccents';
 import { ScrollReveal, MotionButton, StaggerContainer, StaggerItem } from '../components/AnimatedUi';
+import { handleImageError } from '../utils/imageUtils';
 
 interface GalleryPageProps {
   onNavigate: (page: PageId) => void;
@@ -123,6 +124,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({
                     src={item.image}
                     alt={item.title}
                     loading="lazy"
+                    onError={(e) => handleImageError(e, 'art')}
                     className="w-full h-full object-cover group-hover:scale-106 transition-transform duration-600 ease-out"
                     referrerPolicy="no-referrer"
                   />

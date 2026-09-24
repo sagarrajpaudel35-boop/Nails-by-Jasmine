@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { TinyStar, MicroFlower, NailCurveAccent, SoftOrganicBlob } from '../components/DecorativeAccents';
 import { ScrollReveal, StaggerContainer, StaggerItem, MotionButton, FloatAccent } from '../components/AnimatedUi';
+import { handleImageError } from '../utils/imageUtils';
 
 interface HomePageProps {
   onNavigate: (page: PageId) => void;
@@ -135,9 +136,10 @@ export const HomePage: React.FC<HomePageProps> = ({
                   <motion.img
                     whileHover={{ scale: 1.04 }}
                     transition={{ duration: 0.8, ease: 'easeOut' }}
-                    src="/src/assets/images/hero_nail_studio_1790223292300.jpg"
+                    src="/images/hero_nail_studio.jpg"
                     alt="Elegant almond nail art created at Nails by Jasmine studio"
                     className="w-full aspect-[4/3] sm:aspect-[5/4] object-cover transition-transform"
+                    onError={(e) => handleImageError(e, 'hero')}
                     referrerPolicy="no-referrer"
                   />
 
@@ -252,6 +254,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                     <img
                       src={service.image}
                       alt={service.name}
+                      onError={(e) => handleImageError(e, 'gel')}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       referrerPolicy="no-referrer"
                     />
@@ -350,6 +353,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                 <img
                   src={item.image}
                   alt={item.title}
+                  onError={(e) => handleImageError(e, 'art')}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-600 ease-out"
                   referrerPolicy="no-referrer"
                 />

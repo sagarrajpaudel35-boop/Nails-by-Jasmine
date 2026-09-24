@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import { TinyStar, MicroFlower, NailCurveAccent, SoftOrganicBlob } from '../components/DecorativeAccents';
 import { ScrollReveal, MotionButton, FloatAccent, StaggerContainer, StaggerItem } from '../components/AnimatedUi';
+import { handleImageError } from '../utils/imageUtils';
 
 interface AboutPageProps {
   onNavigate: (page: PageId) => void;
@@ -120,6 +121,13 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
                     transition={{ duration: 0.6 }}
                     src={activePhotoSrc}
                     alt="Jasmine, founder and nail artist at Nails by Jasmine in Pokhara"
+                    onError={(e) => {
+                      const img = e.currentTarget;
+                      if (!img.dataset.retried) {
+                        img.dataset.retried = '1';
+                        img.src = '/images/jasmine_birthday_photo_1790226189599.jpg';
+                      }
+                    }}
                     className="w-full aspect-[3/4] object-cover transition-transform"
                     referrerPolicy="no-referrer"
                   />
@@ -299,8 +307,9 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
         <ScrollReveal variant="zoom-in" duration={0.8}>
           <div className="rounded-2xl overflow-hidden bg-[#EFE8DD] border border-[#DECDBB] aspect-[21/9] sm:aspect-[3/1] max-h-72">
             <img
-              src="/src/assets/images/studio_detail_corner_1790223416373.jpg"
+              src="/images/studio_detail_corner.jpg"
               alt="Cozy sunlit workstation in Jasmine's Pokhara studio"
+              onError={(e) => handleImageError(e, 'studio')}
               className="w-full h-full object-cover"
               referrerPolicy="no-referrer"
             />

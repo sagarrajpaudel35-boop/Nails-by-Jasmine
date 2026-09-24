@@ -6,7 +6,7 @@ export const GALLERY_DATA: GalleryItem[] = [
     title: 'Butter Glazed Almond Set',
     category: 'Gel',
     description: 'Clean medium almond silhouette with soft butter-yellow micro French tips and high-gloss mirror glaze.',
-    image: '/src/assets/images/hero_nail_studio_1790223292300.jpg',
+    image: '/images/hero_nail_studio.jpg',
     styleTags: ['Almond', 'Butter Yellow', 'Micro French']
   },
   {
@@ -14,7 +14,7 @@ export const GALLERY_DATA: GalleryItem[] = [
     title: 'Minimal Hand-Painted Micro Florals',
     category: 'Nail Art',
     description: 'Delicate daisy petals and star accents on a milky nude sheer base, hand-painted with ultra-fine brushes.',
-    image: '/src/assets/images/minimal_nail_art_1790223307802.jpg',
+    image: '/images/minimal_nail_art.jpg',
     styleTags: ['Hand Painted', 'Milky Base', 'Floral Accents']
   },
   {
@@ -22,7 +22,7 @@ export const GALLERY_DATA: GalleryItem[] = [
     title: 'Sculpted Soft Ombré Extensions',
     category: 'Acrylic',
     description: 'Crisp tapered square extensions with seamless nude-to-ivory ombré gradient and ultra-smooth apex.',
-    image: '/src/assets/images/acrylic_extensions_1790223323470.jpg',
+    image: '/images/acrylic_extensions.jpg',
     styleTags: ['Ombré', 'Sculpted', 'Tapered Square']
   },
   {
@@ -30,7 +30,7 @@ export const GALLERY_DATA: GalleryItem[] = [
     title: 'Bespoke Travertine Bridal Collection',
     category: 'Custom Sets',
     description: 'Handcrafted custom set styled with soft mother-of-pearl accents and delicate metallic foil highlights.',
-    image: '/src/assets/images/custom_nail_set_1790223353010.jpg',
+    image: '/images/custom_nail_set.jpg',
     styleTags: ['Bridal', 'Pearl Accents', 'Custom Fit']
   },
   {
@@ -38,7 +38,7 @@ export const GALLERY_DATA: GalleryItem[] = [
     title: 'Pearly Glaze Gel Polish',
     category: 'Gel',
     description: 'Subtle pearlescent chrome powder buffed over natural peach builder gel for an ethereal glow.',
-    image: '/src/assets/images/gel_polish_glossy_1790223389516.jpg',
+    image: '/images/gel_polish_glossy.jpg',
     styleTags: ['Chrome Glaze', 'Peach Base', 'Glossy']
   },
   {
@@ -46,7 +46,7 @@ export const GALLERY_DATA: GalleryItem[] = [
     title: 'Clean Russian-Technique Natural Manicure',
     category: 'Extensions',
     description: 'Impeccable dry cuticle alignment, strengthening overlay, and crystal clear glossy topcoat.',
-    image: '/src/assets/images/delicate_manicure_1790223401578.jpg',
+    image: '/images/delicate_manicure.jpg',
     styleTags: ['Natural Care', 'Dry Manicure', 'High Shine']
   },
   {
@@ -54,7 +54,7 @@ export const GALLERY_DATA: GalleryItem[] = [
     title: 'Pokhara Studio Session View',
     category: 'Custom Sets',
     description: 'Cozy private studio workstation setting in Prithivi Chowk, calm aesthetic with herbal tea and natural light.',
-    image: '/src/assets/images/studio_detail_corner_1790223416373.jpg',
+    image: '/images/studio_detail_corner.jpg',
     styleTags: ['Studio Vibe', 'Pokhara Studio', 'Private Suite']
   },
   {
@@ -62,7 +62,7 @@ export const GALLERY_DATA: GalleryItem[] = [
     title: 'Golden Hour Almond Gel Finish',
     category: 'Nail Art',
     description: 'Subtle starburst motifs and gold foil leaf accents over soft warm beige foundation.',
-    image: '/src/assets/images/minimal_nail_art_1790223307802.jpg',
+    image: '/images/minimal_nail_art.jpg',
     styleTags: ['Star Accents', 'Gold Details', 'Soft Beige']
   },
   {
@@ -70,7 +70,7 @@ export const GALLERY_DATA: GalleryItem[] = [
     title: 'Classic Tapered Acrylic Set',
     category: 'Acrylic',
     description: 'Balanced structural sculpting with natural curve and velvety matte-satin dual finish.',
-    image: '/src/assets/images/acrylic_extensions_1790223323470.jpg',
+    image: '/images/acrylic_extensions.jpg',
     styleTags: ['Stiletto / Coffin', 'Structured', 'Long Lasting']
   }
 ];

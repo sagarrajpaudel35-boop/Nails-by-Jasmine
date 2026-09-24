@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import { NailCurveAccent } from '../components/DecorativeAccents';
 import { ScrollReveal, MotionButton, StaggerContainer, StaggerItem } from '../components/AnimatedUi';
+import { handleImageError } from '../utils/imageUtils';
 
 interface ServicesPageProps {
   onNavigate: (page: PageId) => void;
@@ -75,6 +76,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
                           transition={{ duration: 0.6 }}
                           src={service.image}
                           alt={service.name}
+                          onError={(e) => handleImageError(e, 'gel')}
                           className="w-full aspect-[4/3] object-cover transition-transform"
                           referrerPolicy="no-referrer"
                         />
